@@ -7,14 +7,21 @@ confdir="$workdir/../settings"
 mkdir package/external
 cd package/external || return 1
 
-# Netdata
-git clone https://github.com/muink/luci-app-netdata.git --branch nossl_version
-
 ### Add config
 cat >> "$confdir/extra.conf" <<EOF
 
-# Netdata
-CONFIG_PACKAGE_luci-app-netdata=y
+# 5G模组必备驱动
+CONFIG_PACKAGE_kmod-usb-net-qmi-wwan=y
+CONFIG_PACKAGE_kmod-usb-net-cdc-ether=y
+CONFIG_PACKAGE_uqmi=y
+CONFIG_PACKAGE_luci-proto-qmi=y
+CONFIG_PACKAGE_kmod-usb-serial-option=y
+CONFIG_PACKAGE_kmod-usb-serial-qualcomm=y
+CONFIG_PACKAGE_comgt=y
+
+# 中文界面
+CONFIG_PACKAGE_luci-i18n-base-zh-cn=y
+CONFIG_PACKAGE_luci-i18n-firewall-zh-cn=y
 
 EOF
 
